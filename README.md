@@ -1,5 +1,11 @@
 # miniproject1AS
 
+INF601 - Advanced Programming with Python
+
+Adam Schultz
+
+miniproject1AS
+
 ## Description
 This project will be using the packages NumPy and Matplotlib in order to create 5 graphs that output as PNG files.
 
