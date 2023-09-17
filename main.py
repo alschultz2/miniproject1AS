@@ -6,6 +6,7 @@ import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
 import pprint
+import copy
 
 #(5/5 points) Initial comments with your name, class and project at the top of your .py file.
 #(5/5 points) Proper import of packages used.
@@ -32,26 +33,37 @@ def getClosing(ticker):
     closingList = []
 
 
-
-
     for price in hist["Close"]:
         closingList.append(round(price, 2))
-
-    print(closingList)
 
     return closingList
 
 
 stocks = ["MSFT", "AAPL", "GME", "SONY", "META"]
 
-msftClosing = np.array(getClosing("MSFT"))
+for stock in stocks:
+    stockClosing = np.array(getClosing(stock))
+    days = list(range(1,len(stockClosing)+1))
 
+    #This plots the graph
+    plt.plot(days, stockClosing)
 
-days = list(range(1,len(msftClosing)+1))
+    # Get our Min and Max for Y
+    prices = getClosing(stock)
+    prices.sort()
+    low_price = prices[0]
+    high_price = prices[-1]
 
-plt.plot(days, msftClosing)
-plt.xlabel("Days")
-plt.ylabel("Closing Price")
-plt.show()
+    # Set our X axis min and max
+    #form [xmin, xmax, ymin, ymax]
+    plt.axis([1, 10, low_price-2, high_price+2])
+
+    # Set our labels for the graph
+    plt.xlabel("Days")
+    plt.ylabel("Closing Price")
+    plt.title("Closing Price for " + stock)
+
+    # Finally show the graph
+    plt.show()
 
 
